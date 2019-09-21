@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {Counter} from './counter';
-import {increment, decrement} from '../../store/actions';
+import {increment, decrement, addMore} from '../../store/actions';
 
 const Container = styled.View`
   flex: 1;
@@ -12,11 +12,20 @@ const Container = styled.View`
 `;
 
 function DashboardScene (props) {
-  const {counter, increment, decrement} = props;
+  const {counter, increment, decrement, customAdd} = props;
+
+  const addMore = count => {
+    customAdd (count);
+  };
 
   return (
     <Container>
-      <Counter increment={increment} decrement={decrement} value={counter} />
+      <Counter
+        addMore={addMore}
+        increment={increment}
+        decrement={decrement}
+        value={counter}
+      />
     </Container>
   );
 }
@@ -29,6 +38,7 @@ const mapDispatchToProps = dispatch => {
   return {
     decrement: () => dispatch (decrement),
     increment: () => dispatch (increment),
+    customAdd: count => dispatch (addMore (count)),
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (DashboardScene);

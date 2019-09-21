@@ -21,7 +21,7 @@ const CustomText = styled.Text`
   font-weight: bold;
 `
 
-export const Counter = ({increment, decrement, value}) => {
+export const Counter = ({ increment, decrement, value, addMore}) => {
   return (
     <>
       <CustomText>{value}</CustomText>
@@ -31,6 +31,9 @@ export const Counter = ({increment, decrement, value}) => {
         </CustomButton>
         <CustomButton onPress={decrement}>
           <CustomText>-</CustomText>
+        </CustomButton>
+        <CustomButton onPress={() => addMore(10)}>
+          <CustomText>Add +10</CustomText>
         </CustomButton>
       </BoxView>
     </>
