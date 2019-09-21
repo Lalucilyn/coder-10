@@ -1,0 +1,34 @@
+import React from 'react';
+import styled from 'styled-components';
+import {connect} from 'react-redux';
+import {Counter} from './counter';
+import {increment, decrement} from '../../store/actions';
+
+const Container = styled.View`
+  flex: 1;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+`;
+
+function DashboardScene (props) {
+  const {counter, increment, decrement} = props;
+
+  return (
+    <Container>
+      <Counter increment={increment} decrement={decrement} value={counter} />
+    </Container>
+  );
+}
+const mapStateToProps = ({counter}) => {
+  return {
+    counter,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    decrement: () => dispatch (decrement),
+    increment: () => dispatch (increment),
+  };
+};
+export default connect (mapStateToProps, mapDispatchToProps) (DashboardScene);
